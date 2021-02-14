@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: microservice-order
+    microservice-customer:
+      url: http://localhost:8080/customer/api/v1/
+
+  main:
+    allow-bean-definition-overriding: true
+
+  data:
+    mongodb:
+      uri: mongodb+srv://mkmongouser:Secret_Password@clustermicroservice.fzatn.mongodb.net
+      database: order
+
+server:
+  port: 8090
+  servlet:
+    context-path: /order

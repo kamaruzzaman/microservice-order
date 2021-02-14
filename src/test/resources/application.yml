@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: microservice-order
+  main:
+    allow-bean-definition-overriding: true
+
+
+  devtools:
+    restart:
+      enabled: true
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: order
+
+server:
+  port: 9100
+  servlet:
+    context-path: /order
