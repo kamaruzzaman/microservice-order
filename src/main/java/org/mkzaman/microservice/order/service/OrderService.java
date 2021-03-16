@@ -32,14 +32,14 @@ public class OrderService {
     private static final String CUSTOMER_ORDER_URL = "customerOrders/";
 
     public void createOrder(Order order) {
-        final String url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId();
-        HttpHeaders headers = new HttpHeaders();
+        final var url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId();
+        final var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         log.info("Order Request URL: {}", url);
         try {
-            HttpEntity<Object> request = new HttpEntity<>(order, headers);
-            final ResponseEntity<Order> responseEntity = restTemplate.postForEntity(url, request, Order.class);
+            final var request = new HttpEntity<>(order, headers);
+            final var responseEntity = restTemplate.postForEntity(url, request, Order.class);
             if (responseEntity.getStatusCode().isError()) {
                 log.error("For Order ID: {}, error response: {} is received to create Order in Customer Microservice", order.getId(), responseEntity.getStatusCode().getReasonPhrase());
                 throw new CustomerOrderException(order.getId(), responseEntity.getStatusCodeValue());
@@ -54,13 +54,13 @@ public class OrderService {
     }
 
     public void updateOrder(Order order) {
-        final String url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId();
-        HttpHeaders headers = new HttpHeaders();
+        final var url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId();
+        final var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         log.info("Order Request URL: {}", url);
         try {
-            HttpEntity<Object> request = new HttpEntity<>(order, headers);
+            final var request = new HttpEntity<>(order, headers);
             restTemplate.put(url, request);
         } catch (Exception e) {
             log.error("For Order ID: {}, cannot create Order in Customer Microservice for reason: {}", order.getId(), ExceptionUtils.getRootCauseMessage(e));
@@ -70,7 +70,7 @@ public class OrderService {
 
 
     public void deleteOrder(Order order) {
-        final String url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId() + "/" + order.getId();
+        final var url = customerBaseUrl + CUSTOMER_ORDER_URL + order.getCustomerId() + "/" + order.getId();
 
         log.info("Order Request URL: {}", url);
         try {
@@ -80,5 +80,4 @@ public class OrderService {
             throw new CustomerOrderException(order.getId(), ExceptionUtils.getRootCauseMessage(e));
         }
     }
-
 }

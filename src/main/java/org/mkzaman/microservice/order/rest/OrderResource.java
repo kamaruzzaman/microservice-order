@@ -53,7 +53,7 @@ public class OrderResource {
         if (order.getId() != null) {
             throw new BadRequestAlertException("A new order cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        Order result = orderRepository.save(order);
+        final var result = orderRepository.save(order);
         orderService.createOrder(result);
         return ResponseEntity.created(new URI("/api/orders/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -76,7 +76,7 @@ public class OrderResource {
         if (order.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        Order result = orderRepository.save(order);
+        final var result = orderRepository.save(order);
         orderService.updateOrder(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(applicationName, false, ENTITY_NAME, order.getId().toString()))
@@ -106,7 +106,7 @@ public class OrderResource {
     @Transactional
     public ResponseEntity<Order> getOrder(@PathVariable String id) {
         log.debug("REST request to get Order : {}", id);
-        Optional<Order> order = orderRepository.findById(id);
+        final var order = orderRepository.findById(id);
         return ResponseUtil.wrapOrNotFound(order);
     }
 
@@ -120,7 +120,7 @@ public class OrderResource {
     @Transactional
     public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
         log.debug("REST request to delete Order : {}", id);
-        final Optional<Order> orderOptional = orderRepository.findById(id);
+        final var orderOptional = orderRepository.findById(id);
         orderRepository.deleteById(id);
         if (orderOptional.isPresent()) {
           orderService.deleteOrder(orderOptional.get());
