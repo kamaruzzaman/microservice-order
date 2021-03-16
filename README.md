@@ -7,7 +7,7 @@ The application is a headless Backend application developed using the Spring Boo
 for AWS is used. Also Amazon is used as the public cloud provider.
 
 It is a simple CRUD application to model Order handling of an E-commerce shop. To run this application, first the Customer 
-Microservice from: <placeholder> should also run. 
+Microservice from: https://github.com/kamaruzzaman/microservice-customer should also run. 
 
 Together with the Customer Microservice, it demonstrates the Microservice communication using REST API. 
 
