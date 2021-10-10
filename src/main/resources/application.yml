@@ -3,7 +3,7 @@ spring:
     name: microservice-order
 
     microservice-customer:
-      url: http://aa62f80b9596a4fa6835d80a506227d6-1183908486.eu-central-1.elb.amazonaws.com/customer/api/v1/
+      url: https://customer.microservicesdemo.net/customer/api/v1/
 
   data:
     mongodb:
