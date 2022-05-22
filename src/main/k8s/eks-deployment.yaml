@@ -13,10 +13,14 @@ spec:
     metadata:
       labels:
         app: microservice-order
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/order/actuator/prometheus"
     spec:
       containers:
         - name: microservice-order-container
-          image: 877546708265.dkr.ecr.eu-central-1.amazonaws.com/microservice-order:1.0.0
+          image: 877546708265.dkr.ecr.eu-central-1.amazonaws.com/microservice-order:1.1.0
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
